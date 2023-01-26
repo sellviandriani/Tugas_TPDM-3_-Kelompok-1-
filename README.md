@@ -5,7 +5,7 @@ Ini adalah sebuah aplikasi deployment yang memiliki tujuan untuk menentukan pred
 Dataset ini berasal dari ulasan aplikais instagram pada Google Play Store. Periode 26 JUli 2022 - 26 Oktober 2022
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ##Anggota Kelompok 1 (TPDM-3):
-10519099 - Selvi Andriani
-10519118 - Milah Fauziah
-10519110 - Ananda Ayu OKtaviany
-10519051 - Faradiba Rezkyka
+- 10519099 - Selvi Andriani
+- 10519118 - Milah Fauziah
+- 10519110 - Ananda Ayu OKtaviany
+- 10519051 - Faradiba Rezkyka
