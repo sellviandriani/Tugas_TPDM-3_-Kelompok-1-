@@ -1,29 +1,43 @@
-import pandas as pd
-import pickle
 import streamlit as st
-from sklearn.feature_extraction.text import TfidfVectorizer
+import joblib
 
-#load save model
-model_fraud = pickle.load(open('model_fraud.sav','rb'))
+model_file = open('Instagram Classifier.joblib', 'rb')
+model = joblib.load(model_file)
 
-tfidf = TfidfVectorizer                               
+st.write("""
+# -- Memprediksi Ulasan pada Aplikasi Instagram --
+""")
 
-loaded_vec = TfidfVectorizer(decode_error="replace", vocabulary=set(pickle.load(open("new_selected_feature_tf_idf.sav", "rb"))))
+inputs = st.text_input('Masukkan Teks Komentar')
+cek = st.button('Cek Prediksi Komentar')
 
-#judul
-st.title ('-- Prediksi Komentar Pada Aplikasi Instagram --')
+input_text= [inputs]
+def preProcessText(instagram):
+    new_ig = []
+    for tw in tweer:
+        tw = case_folding(tw)
+        tw = tokenized(tw)
+        tw = stemming(tw)
+        tw = removeSlang(tw)
+        tw = removeStopWords(tw)
+        tw = ' '.join(tw)
+        new_ig.append(tw)
 
-clean_teks = st.text_input('Masukan komentar Instagram')
+    return tw
 
-fraud_detection = ''
+def predictNewData(ig):
+    saved_model = joblib.load('Instagram Classifier.joblib') 
+    saved_tfidf = joblib.load('Instagram TF-IDF Vectorizer.joblib') #???
+   
+    vectorized_ig = saved_tfidf.transform(input_text)
+    print(vectorized_ig.shape)
+    input_prediction = saved_model.predict(vectorized_ig)
+    
+    for i in range(len(inputs)):
+        if cek:
+            if input_prediction[i]:
+                st.write('\nPrediksi Ulasan :',input_prediction[i])
+            else:
+               st.write('\nPrediksi Ulasan :',input_prediction[i])
 
-if st.button('Hasil Prediksi'):
-    predict_fraud = model_fraud.predict(loaded_vec.fit_transform([clean_teks]))
-
-    if (predict_fraud[0] == 0):
-        fraud_detection = "Komentar Bersifat Negatif"
-    else :
-        fraud_detection = "Komentar Bersifat Positif"
-
-st.success(fraud_detection)  
-
+predictNewData(inputs)
